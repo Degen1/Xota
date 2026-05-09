@@ -1,98 +1,109 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { getAppTheme } from '@/constants/appTheme';
+import { useAppTheme } from '@/hooks/useAppTheme';
+import { useRouter } from 'expo-router';
+import React from 'react';
+import {
+  Dimensions,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const H_PAD = 16;
+const GUTTER = 16;
+const NUM_COLS = 3;
+const CARD_SIZE = (SCREEN_WIDTH - H_PAD * 2 - GUTTER * (NUM_COLS - 1)) / NUM_COLS;
+const BOTTOM_SPACING = 100;
 
-export default function HomeScreen() {
+const games = [
+  { id: '1', title: 'ጉያ', image: require('../../assets/images/game1.png'), route: '/game1' },
+  { id: '2', title: 'ካልኩሌተር', image: require('../../assets/images/game2.png'), route: '/game2' },
+  { id: '3', title: 'ዳማ', image: require('../../assets/images/game3.png'), route: '/game3' },
+  { id: '4', title: 'ምክልኻል', image: require('../../assets/images/game4.png'), route: '/game4' },
+  { id: '5', title: 'ኮኾብ', image: require('../../assets/images/game5.png'), route: '/game5' },
+  { id: '6', title: 'ሓዝ', image: require('../../assets/images/game6.png'), route: '/game6' },
+  { id: '7', title: 'ነፋሪት', image: require('../../assets/images/game7.png'), route: '/game7' },
+  { id: '8', title: 'ሰለስተ', image: require('../../assets/images/game8.png'), route: '/game8' },
+  { id: '9', title: 'ኣርባዕተ', image: require('../../assets/images/game9.jpg'), route: '/game9' },
+  { id: '10', title: 'ተመን', image: require('../../assets/images/game10.png'), route: '/game10' },
+  { id: '11', title: 'ቑጽሪ', image: require('../../assets/images/game11.png'), route: '/game11' },
+  { id: '12', title: 'ውድድር', image: require('../../assets/images/game12.png'), route: '/game12' },
+  { id: '13', title: 'ቸስ', image: require('../../assets/images/game13.png'), route: '/game13' },
+  { id: '14', title: 'ካርታ', image: require('../../assets/images/game14.png'), route: '/game14' },
+  { id: '15', title: 'ጸወታ 15', image: require('../../assets/images/game10.png'), route: '/game15' },
+  { id: '16', title: 'ጸወታ 16', image: require('../../assets/images/game10.png'), route: '/game16' },
+  { id: '17', title: 'ጸወታ 17', image: require('../../assets/images/game10.png'), route: '/game17' },
+  { id: '18', title: 'ጸወታ 18', image: require('../../assets/images/game10.png'), route: '/game18' },
+];
+
+export default function GamesScreen() {
+  const router = useRouter();
+  const { colorScheme } = useAppTheme();
+  const theme = getAppTheme(colorScheme);
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
-
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <SafeAreaView
+      edges={['top', 'left', 'right']}
+      style={[styles.container, { backgroundColor: theme.background }]}>
+      <View style={styles.header}>
+        <Text style={[styles.title, { color: theme.text }]}>ጸወታ</Text>
+      </View>
+      <ScrollView
+        contentContainerStyle={[styles.grid, { paddingBottom: BOTTOM_SPACING }]}
+        showsVerticalScrollIndicator={false}>
+        {games.map((game) => (
+          <TouchableOpacity
+            key={game.id}
+            style={[styles.card, { backgroundColor: theme.mutedSurface }]}
+            activeOpacity={0.8}
+            onPress={() => router.push(game.route as never)}>
+            <Image source={game.image} style={styles.cardImage} />
+            <Text numberOfLines={1} style={[styles.cardTitle, { color: theme.text }]}>
+              {game.title}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: { flex: 1 },
+  header: {
+    paddingHorizontal: H_PAD,
+    paddingBottom: 12,
+    paddingTop: 8,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: '800',
+  },
+  grid: {
     flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    paddingHorizontal: H_PAD,
+    paddingTop: 4,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  card: {
+    width: CARD_SIZE,
+    height: CARD_SIZE + 24,
+    borderRadius: 8,
+    marginBottom: GUTTER,
+    overflow: 'hidden',
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  cardImage: { width: CARD_SIZE, height: CARD_SIZE },
+  cardTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    textAlign: 'center',
+    marginTop: 4,
+    paddingHorizontal: 4,
   },
 });
