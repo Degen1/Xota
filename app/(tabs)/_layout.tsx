@@ -1,8 +1,7 @@
-import { Tabs } from 'expo-router';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { Icon, Label, NativeTabs, VectorIcon } from 'expo-router/unstable-native-tabs';
 import React from 'react';
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
@@ -10,27 +9,19 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Games',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="gamecontroller.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          href: null,
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
+    <NativeTabs tintColor={Colors[colorScheme ?? 'light'].tint}>
+      <NativeTabs.Trigger name="index">
+        <Label>ጸወታ</Label>
+        <Icon src={<VectorIcon family={MaterialCommunityIcons} name="gamepad-variant" />} />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="setting">
+        <Label>መማረጺ</Label>
+        <Icon src={<VectorIcon family={MaterialCommunityIcons} name="cog" />} />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="explore" hidden>
+        <Label>Explore</Label>
+        <Icon src={<VectorIcon family={MaterialCommunityIcons} name="send" />} />
+      </NativeTabs.Trigger>
+    </NativeTabs>
   );
 }
