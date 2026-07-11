@@ -1,0 +1,12 @@
+Xota is a collection of simple, fast games designed for quick play sessions in Tigrinya.
+
+Play arcade challenges, reaction games, classic board-style games, and score-based games from one clean home screen. Xota includes games such as jumping, dodging, star catching, target tapping, flying, tic-tac-toe, connect-four style play, and snake.
+
+Features:
+- Multiple playable games in one app
+- Tigrinya game labels and in-game text
+- Light, dark, and system appearance options
+- Score tracking and replay-friendly sessions
+- Simple touch controls designed for iPhone and iPad
+
+Xota is built for casual play: open the app, choose a game, and start playing right away.
