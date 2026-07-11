@@ -21,7 +21,6 @@ const BOTTOM_SPACING = 100;
 
 const games = [
   { id: '1', title: 'ጉያ', image: require('../../assets/images/game1.png'), route: '/game1' },
-  { id: '3', title: 'ዳማ', image: require('../../assets/images/game3.png'), route: '/game3' },
   { id: '4', title: 'ምክልኻል', image: require('../../assets/images/game4.png'), route: '/game4' },
   { id: '5', title: 'ኮኾብ', image: require('../../assets/images/game5.png'), route: '/game5' },
   { id: '6', title: 'ሓዝ', image: require('../../assets/images/game6.png'), route: '/game6' },
