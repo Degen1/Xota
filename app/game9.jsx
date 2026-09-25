@@ -1,3 +1,4 @@
+import { withGameRefresh } from '@/components/refreshable-scroll-view';
 // App.js
 import React, { useMemo, useState, useEffect } from "react";
 import {
@@ -130,7 +131,7 @@ function bestComputerMove(board) {
   return best;
 }
 
-export default function App() {
+function App() {
   // Theme
   const { colorScheme } = useAppTheme();
   const isDark = colorScheme === "dark";
@@ -261,7 +262,7 @@ export default function App() {
     if (vsComputer) {
       return turn === HUMAN ? "ናይ ቀይሕ ታራ" : "ናይ ብጫ ታራ";
     }
-    return `ዝተኸልከሉ: ${turn === "R" ? "Red" : "Yellow"}`;
+    return `ተራ ናይ ${turn === "R" ? "ቀይሕ" : "ብጫ"}`;
   })();
 
   // Win-line set for highlighting
@@ -390,7 +391,7 @@ export default function App() {
             onPress={onAddLife}
             disabled={isGrantingLife}>
             <Text style={styles.btnText}>
-              {isGrantingLife ? "Adding life..." : "+1 ህይወት"}
+              {isGrantingLife ? "ህይወት ይውሰኽ ኣሎ…" : "+1 ህይወት"}
             </Text>
           </Pressable>
         )}
@@ -465,3 +466,5 @@ const styles = StyleSheet.create({
   disabled: { opacity: 0.65 },
   btnText: { color: "white", fontWeight: "800", fontSize: 14 },
 });
+
+export default withGameRefresh(App);

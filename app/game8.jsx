@@ -1,3 +1,4 @@
+import { withGameRefresh } from '@/components/refreshable-scroll-view';
 // App.js
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
@@ -94,7 +95,7 @@ function bestMoveMinimax(board, ai = "O", human = "X") {
   return move;
 }
 
-export default function App() {
+function App() {
   const { colorScheme } = useAppTheme();
   const isDark = colorScheme === "dark";
   const theme = isDark
@@ -335,7 +336,7 @@ export default function App() {
             onPress={onAddLife}
             disabled={isGrantingLife}>
             <Text style={styles.btnText}>
-              {isGrantingLife ? "Adding life..." : "+1 ህይወት"}
+              {isGrantingLife ? "ህይወት ይውሰኽ ኣሎ…" : "+1 ህይወት"}
             </Text>
           </Pressable>
         )}
@@ -409,3 +410,5 @@ const styles = StyleSheet.create({
   disabled: { opacity: 0.65 },
   btnText: { color: "white", fontWeight: "800", fontSize: 14 },
 });
+
+export default withGameRefresh(App);

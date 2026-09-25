@@ -1,3 +1,4 @@
+import { RefreshableScrollView } from '@/components/refreshable-scroll-view';
 import { useAppTheme } from '@/hooks/useAppTheme';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -22,7 +23,7 @@ export default function ComingSoonGame({ title }) {
       };
 
   return (
-    <SafeAreaView style={[styles.safe, { backgroundColor: theme.background }]}>
+    <RefreshableScrollView><SafeAreaView style={[styles.safe, { backgroundColor: theme.background }]}>
       <View style={styles.header}>
         <Text style={[styles.title, { color: theme.text }]}>{title}</Text>
         <Text style={[styles.meta, { color: theme.hint }]}>ህይወት: 1</Text>
@@ -30,7 +31,7 @@ export default function ComingSoonGame({ title }) {
       <View style={[styles.card, { backgroundColor: theme.card, borderColor: theme.border }]}>
         <Text style={[styles.body, { color: theme.hint }]}>ኣብ ቀረባ እዋን ክቕረብ እዩ...</Text>
       </View>
-    </SafeAreaView>
+    </SafeAreaView></RefreshableScrollView>
   );
 }
 
