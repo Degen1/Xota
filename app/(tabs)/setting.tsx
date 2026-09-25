@@ -1,3 +1,4 @@
+import { RefreshableScrollView } from '@/components/refreshable-scroll-view';
 import { getAppTheme } from '@/constants/appTheme';
 import { useAppTheme } from '@/hooks/useAppTheme';
 import React from 'react';
@@ -24,7 +25,7 @@ export default function SettingScreen() {
     <SafeAreaView
       edges={['top', 'left', 'right']}
       style={[styles.container, { backgroundColor: theme.background }]}>
-      <View style={styles.content}>
+      <RefreshableScrollView contentContainerStyle={styles.content}>
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: theme.text }]}>ልጪ</Text>
           <View style={[styles.segmentedControl, { backgroundColor: theme.mutedSurface }]}>
@@ -51,7 +52,7 @@ export default function SettingScreen() {
             })}
           </View>
         </View>
-      </View>
+      </RefreshableScrollView>
     </SafeAreaView>
   );
 }
@@ -59,6 +60,7 @@ export default function SettingScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   content: {
+    paddingBottom: 100,
     paddingHorizontal: 16,
     paddingTop: 16,
     gap: 16,

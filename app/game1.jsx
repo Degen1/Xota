@@ -1,3 +1,4 @@
+import { withGameRefresh } from '@/components/refreshable-scroll-view';
 // App.js
 import React, { useEffect, useRef, useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
@@ -18,7 +19,7 @@ const OBSTACLE_WIDTH = 44;
 const OBSTACLE_MIN_HEIGHT = 30;
 const OBSTACLE_MAX_HEIGHT = 110;
 
-export default function App() {
+function App() {
   const { colorScheme } = useAppTheme();
   const isDark = colorScheme === "dark";
   const theme = isDark
@@ -336,7 +337,7 @@ export default function App() {
               }}
               disabled={isGrantingLife}>
               <Text style={styles.extraLifeBtnText}>
-                {isGrantingLife ? "Adding life..." : "+1 ህይወት"}
+                {isGrantingLife ? "ህይወት ይውሰኽ ኣሎ…" : "+1 ህይወት"}
               </Text>
             </Pressable>
           )}
@@ -405,3 +406,5 @@ const styles = StyleSheet.create({
   restartBtnText: { color: "#fff", fontWeight: "800", fontSize: 15 },
   disabled: { opacity: 0.65 },
 });
+
+export default withGameRefresh(App, true);

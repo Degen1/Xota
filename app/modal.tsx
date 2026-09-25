@@ -1,23 +1,23 @@
+import { RefreshableScrollView } from '@/components/refreshable-scroll-view';
 import { Link } from 'expo-router';
 import { StyleSheet } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
 
 export default function ModalScreen() {
   return (
-    <ThemedView style={styles.container}>
-      <ThemedText type="title">This is a modal</ThemedText>
+    <RefreshableScrollView contentContainerStyle={styles.container}>
+      <ThemedText type="title">ጸወታ</ThemedText>
       <Link href="/" dismissTo style={styles.link}>
-        <ThemedText type="link">Go to home screen</ThemedText>
+        <ThemedText type="link">ናብ ቀንዲ ገጽ ተመለስ</ThemedText>
       </Link>
-    </ThemedView>
+    </RefreshableScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,

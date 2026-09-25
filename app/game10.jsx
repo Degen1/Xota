@@ -1,3 +1,4 @@
+import { withGameRefresh } from '@/components/refreshable-scroll-view';
 // App.js
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
@@ -40,7 +41,7 @@ function randomEmptyCell(snake) {
   }
 }
 
-export default function App() {
+function App() {
   // Theme
   const { colorScheme } = useAppTheme();
   const isDark = colorScheme === "dark";
@@ -333,7 +334,7 @@ export default function App() {
             onPress={onAddLife}
             disabled={isGrantingLife}>
             <Text style={styles.btnText}>
-              {isGrantingLife ? "Adding life..." : "+1 ህይወት"}
+              {isGrantingLife ? "ህይወት ይውሰኽ ኣሎ…" : "+1 ህይወት"}
             </Text>
           </Pressable>
         )}
@@ -417,3 +418,5 @@ const styles = StyleSheet.create({
   },
   padTxt: { color: "white", fontWeight: "900", fontSize: 16 },
 });
+
+export default withGameRefresh(App);
